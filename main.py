@@ -8,6 +8,7 @@ import re
 import atexit
 import termios
 import subprocess
+import time
 
 term_attr = termios.tcgetattr(0)
 
@@ -42,10 +43,13 @@ else:
 				else:
 					received_str = received_str.replace(macro, macro.strip("{}")[2:].decode("hex"))
 
-			temp_attr = termios.tcgetattr(pty)
-			tty.setraw(pty)
-			os.write(pty, received_str)
-			termios.tcsetattr(pty, termios.TCSANOW, temp_attr)
+			if len(little_endian_macros) != 0:
+				temp_attr = termios.tcgetattr(pty)
+				tty.setraw(pty, termios.TCSANOW)
+				os.write(pty, received_str)
+				time.sleep(0.1)
+				termios.tcsetattr(pty, termios.TCSANOW, temp_attr)
+			else:
+				os.write(pty, received_str)
 		else:
 			os.write(1, os.read(pty, 0x1000000))
-#0x7f606fee075c

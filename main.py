@@ -37,7 +37,7 @@ def raw_output_mode_toggle():
 	if raw_output_mode == NORMAL_OUTPUT_MODE:
 		os.write(1, "\r\n{0} normal output mode\r\n".format(MINUS))
 	elif raw_output_mode == HEX_OUTPUT_MODE_MIXED:
-		os.write(1, "\r\n{0} raw (mixed) output mode\r\n".format(PLUS))
+		os.write(1, "\r\n{0} raw (mixed) output mode\r\n".format(ASTERIX))
 	elif raw_output_mode == HEX_OUTPUT_MODE_FULL:
 		os.write(1, "\r\n{0} raw (full) output mode\r\n".format(PLUS))
 
